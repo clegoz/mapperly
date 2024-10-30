@@ -75,6 +75,11 @@ public static class MapperConfigurationMerger
         mapper.EnumNamingStrategy =
             mapperConfiguration.EnumNamingStrategy ?? defaultMapperConfiguration.EnumNamingStrategy ?? mapper.EnumNamingStrategy;
 
+        mapper.EnableNullChecksInProjections =
+            mapperConfiguration.EnableNullChecksInProjections
+            ?? defaultMapperConfiguration.EnableNullChecksInProjections
+            ?? mapper.EnableNullChecksInProjections;
+
         return mapper;
     }
 }

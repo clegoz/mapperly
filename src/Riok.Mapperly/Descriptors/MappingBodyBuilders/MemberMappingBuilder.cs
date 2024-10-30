@@ -113,7 +113,16 @@ internal static class MemberMappingBuilder
             return false;
         }
 
-        sourceValue = BuildInlineNullHandlingMapping(ctx, delegateMapping, sourceMember.MemberPath, targetMember.MemberType);
+        var disableNullChecksInProjections =
+            ctx.BuilderContext.IsExpression && !ctx.BuilderContext.Configuration.Mapper.EnableNullChecksInProjections;
+        if (disableNullChecksInProjections)
+        {
+            sourceValue = BuildInlineNonNullMapping(ctx, delegateMapping, sourceMember.MemberPath, targetMember);
+        }
+        else
+        {
+            sourceValue = BuildInlineNullHandlingMapping(ctx, delegateMapping, sourceMember.MemberPath, targetMember.MemberType);
+        }
         return true;
     }
 
@@ -166,6 +175,23 @@ internal static class MemberMappingBuilder
             targetMemberType,
             nullFallback,
             !ctx.BuilderContext.IsExpression
+        );
+    }
+
+    private static MappedMemberSourceValue BuildInlineNonNullMapping(
+        IMembersBuilderContext<IMapping> ctx,
+        INewInstanceMapping delegateMapping,
+        MemberPath sourcePath,
+        NonEmptyMemberPath targetMember
+    )
+    {
+        return new MappedMemberSourceValue(
+            delegateMapping,
+            sourcePath.BuildGetter(ctx.BuilderContext),
+            !ctx.BuilderContext.IsExpression,
+            addValuePropertyOnNullable: (
+                sourcePath.MemberType.IsNullable() && (!delegateMapping.IsSynthetic || !targetMember.MemberType.IsNullable())
+            )
         );
     }
 

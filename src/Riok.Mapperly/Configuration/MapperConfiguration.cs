@@ -130,4 +130,9 @@ public record MapperConfiguration
     /// Can be overwritten on specific enums via mapping method configurations.
     /// </summary>
     public EnumNamingStrategy? EnumNamingStrategy { get; init; }
+
+    /// <summary>
+    /// Whether to disable null checks in projections.
+    /// </summary>
+    public bool? EnableNullChecksInProjections { get; set; }
 }

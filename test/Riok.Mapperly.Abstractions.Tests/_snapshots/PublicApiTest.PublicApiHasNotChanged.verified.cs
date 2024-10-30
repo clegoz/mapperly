@@ -123,6 +123,7 @@ namespace Riok.Mapperly.Abstractions
         public MapperAttribute() { }
         public bool AllowNullPropertyAssignment { get; set; }
         public bool AutoUserMappings { get; set; }
+        public bool EnableNullChecksInProjections { get; set; }
         public Riok.Mapperly.Abstractions.MappingConversionType EnabledConversions { get; set; }
         public bool EnumMappingIgnoreCase { get; set; }
         public Riok.Mapperly.Abstractions.EnumMappingStrategy EnumMappingStrategy { get; set; }

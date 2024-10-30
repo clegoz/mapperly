@@ -137,4 +137,9 @@ public class MapperAttribute : Attribute
     /// partial methods are discovered.
     /// </summary>
     public bool AutoUserMappings { get; set; } = true;
+
+    /// <summary>
+    /// Whether to disable null checks in projections.
+    /// </summary>
+    public bool EnableNullChecksInProjections { get; set; } = true;
 }

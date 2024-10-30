@@ -99,6 +99,7 @@ public static class TestSourceBuilder
             Attribute(options.IncludedConstructors),
             Attribute(options.PreferParameterlessConstructors),
             Attribute(options.AutoUserMappings),
+            Attribute(options.EnableNullChecksInProjections),
         }.WhereNotNull();
 
         return $"[Mapper({string.Join(", ", attrs)})]";

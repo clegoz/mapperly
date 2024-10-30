@@ -22,7 +22,8 @@ public record TestSourceBuilderOptions(
     MemberVisibility? IncludedConstructors = null,
     bool Static = false,
     bool PreferParameterlessConstructors = true,
-    bool AutoUserMappings = true
+    bool AutoUserMappings = true,
+    bool? EnableNullChecksInProjections = true
 )
 {
     public const string DefaultMapperClassName = "Mapper";
@@ -32,6 +33,7 @@ public record TestSourceBuilderOptions(
     public static readonly TestSourceBuilderOptions WithDeepCloning = new(UseDeepCloning: true);
     public static readonly TestSourceBuilderOptions WithReferenceHandling = new(UseReferenceHandling: true);
     public static readonly TestSourceBuilderOptions WithDisabledAutoUserMappings = new(AutoUserMappings: false);
+    public static readonly TestSourceBuilderOptions WithDisabledNullChecksInProjections = new(EnableNullChecksInProjections: false);
 
     public static readonly TestSourceBuilderOptions PreferParameterizedConstructors = new(PreferParameterlessConstructors: false);
 
